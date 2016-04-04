@@ -1,7 +1,7 @@
-﻿using Revolution.Events.Arguments;
-using Revolution.Logging;
+﻿using Farmhand.Events.Arguments;
+using Farmhand.Logging;
 using System;
-using Revolution;
+using Farmhand;
 using StardewValley;
 
 namespace LoggingMod
@@ -19,27 +19,37 @@ namespace LoggingMod
             //    Log.IsVerbose = Configuration.UseVerboseLogging;
             //}
 
-            Revolution.Events.GameEvents.OnBeforeGameInitialised += OnGameInitialising;
-            Revolution.Events.GameEvents.OnAfterGameInitialised += OnGameInitialised;
-            Revolution.Events.GameEvents.OnBeforeLoadContent += GameEvents_OnBeforeLoadContent;
-            Revolution.Events.GameEvents.OnAfterLoadedContent += GameEvents_OnAfterLoadedContent;
-            Revolution.Events.GameEvents.OnBeforeUpdateTick += GameEvents_OnBeforeUpdateTick;
-            Revolution.Events.GameEvents.OnAfterUpdateTick += GameEvents_OnAfterUpdateTick;
-            Revolution.Events.GraphicsEvents.OnResize += GraphicsEvents_OnResize;
-            Revolution.Events.GraphicsEvents.OnBeforeDraw += GraphicsEvents_OnBeforeDraw;
-            Revolution.Events.GraphicsEvents.OnAfterDraw += GraphicsEvents_OnAfterDraw;
-            Revolution.Events.LocationEvents.OnLocationsChanged += LocationEvents_OnLocationsChanged;
-            Revolution.Events.LocationEvents.OnCurrentLocationChanged += LocationEvents_OnCurrentLocationChanged;
-            Revolution.Events.LocationEvents.OnLocationObjectsChanged += LocationEvents_OnLocationObjectsChanged;
-            Revolution.Events.PlayerEvents.OnBeforePlayerTakesDamage += PlayerEvents_OnBeforePlayerTakesDamage;
-            Revolution.Events.UiEvents.OnAfterIClickableMenuInitialized += UiEvents_OnAfterIClickableMenuInitialized;
+            Farmhand.Events.GameEvents.OnBeforeGameInitialised += OnGameInitialising;
+            Farmhand.Events.GameEvents.OnAfterGameInitialised += OnGameInitialised;
+            Farmhand.Events.GameEvents.OnBeforeLoadContent += GameEvents_OnBeforeLoadContent;
+            Farmhand.Events.GameEvents.OnAfterLoadedContent += GameEvents_OnAfterLoadedContent;
+            Farmhand.Events.GameEvents.OnBeforeUpdateTick += GameEvents_OnBeforeUpdateTick;
+            Farmhand.Events.GameEvents.OnAfterUpdateTick += GameEvents_OnAfterUpdateTick;
+            Farmhand.Events.GraphicsEvents.OnResize += GraphicsEvents_OnResize;
+            Farmhand.Events.GraphicsEvents.OnBeforeDraw += GraphicsEvents_OnBeforeDraw;
+            Farmhand.Events.GraphicsEvents.OnAfterDraw += GraphicsEvents_OnAfterDraw;
+            Farmhand.Events.LocationEvents.OnLocationsChanged += LocationEvents_OnLocationsChanged;
+            Farmhand.Events.LocationEvents.OnCurrentLocationChanged += LocationEvents_OnCurrentLocationChanged;
+            Farmhand.Events.LocationEvents.OnLocationObjectsChanged += LocationEvents_OnLocationObjectsChanged;
+            Farmhand.Events.PlayerEvents.OnBeforePlayerTakesDamage += PlayerEvents_OnBeforePlayerTakesDamage;
+            Farmhand.Events.UiEvents.OnAfterIClickableMenuInitialized += UiEvents_OnAfterIClickableMenuInitialized;
+            Farmhand.Events.LocationEvents.OnBeforeLocationLoadObjects += LocationEvents_OnBeforeLocationLoadObjects;
+            Farmhand.Events.LocationEvents.OnAfterLocationLoadObjects += LocationEvents_OnAfterLocationLoadObjects; 
+        }
 
-            Log.Info("test");
+        private void LocationEvents_OnAfterLocationLoadObjects(object sender, EventArgs e)
+        {
+            //Log.Info("LocationEvents_OnAfterLocationLoadObjects");
+        }
+
+        private void LocationEvents_OnBeforeLocationLoadObjects(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            //Log.Info("LocationEvents_OnBeforeLocationLoadObjects");
         }
 
         private void UiEvents_OnAfterIClickableMenuInitialized(object sender, EventArgs e)
         {
-            Game1.player.gainExperience(1, 2000);
+
         }
 
         private void PlayerEvents_OnBeforePlayerTakesDamage(object sender, EventArgsOnBeforePlayerTakesDamage e)
@@ -64,12 +74,12 @@ namespace LoggingMod
 
         private void GraphicsEvents_OnAfterDraw(object sender, EventArgs e)
         {
-            //Log.Verbose("GraphicsEvents_OnAfterDraw");
+            //Log.Error("GraphicsEvents_OnAfterDraw");
         }
 
         private void GraphicsEvents_OnBeforeDraw(object sender, EventArgs e)
         {
-            //Log.Verbose("GraphicsEvents_OnBeforeDraw");
+            //Log.Success("GraphicsEvents_OnBeforeDraw");
         }
 
         private void GraphicsEvents_OnResize(object sender, EventArgs e)
